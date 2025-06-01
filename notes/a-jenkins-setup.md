@@ -1,57 +1,116 @@
-ran these two commands 
+Here's a clearer and more professionally written version of your instructions:
+
+---
+
+## ✅ Environment Setup Instructions for Terraform, AWS CLI, and Ansible
+
+### 1. **Install Required Tools**
+
+Open your terminal and run the following commands:
+
+```bash
 brew install terraform
 brew install awscli
+```
 
-python3 -m pip install --user ansible  
-don't use brew to install ansible as it tries to download large files 
+> 💡 **Note:** Do **not** use Homebrew to install Ansible—it pulls large dependencies.
 
+Instead, install Ansible using pip:
+
+```bash
+python3 -m pip install --user ansible
+```
+
+---
+
+### 2. **Generate SSH Key Pair**
+
+To create a secure RSA key pair for EC2 instance access:
+
+```bash
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa
+```
 
+---
 
-created aws console account 
-created terraform-user with programmatic access 
-created user santosh with console and programmatic access 
+### 3. **AWS Account Setup**
 
-created main.tf variable.tf and output.tf file to create ec2 instances using terraform 
+* Created an AWS Console account.
+* Created an IAM user named `terraform-user` with **programmatic access** only.
+* Created an IAM user named `santosh` with **both console and programmatic access**.
 
-pushed the change to github (optional)
+---
 
+### 4. **Terraform Project Structure**
 
-use 
+Created the following Terraform files to provision EC2 instances:
+
+* `main.tf`
+* `variables.tf`
+* `output.tf`
+
+Optionally, pushed the code to GitHub for version control.
+
+---
+
+### 5. **Set Up Python Virtual Environment for Ansible (Recommended)**
+
+Activate your Ansible environment with:
+
+```bash
 source ~/ansible-env/bin/activate
+```
 
-to activate ansible env then ansible aws and terraform are available 
+Once activated, you can use `ansible`, `aws`, and `terraform` from this environment.
 
+Sample output:
 
-The output looks like 
-gopal:~ gopalkhanal$ source ~/ansible-env/bin/activate
+```bash
 (ansible-env) gopal:~ gopalkhanal$ terraform --version
 Terraform v1.12.1
-on darwin_amd64
+
 (ansible-env) gopal:~ gopalkhanal$ aws --version
-aws-cli/2.27.26 Python/3.13.3 Darwin/21.6.0 exe/x86_64
+aws-cli/2.27.26 Python/3.13.3 Darwin/21.6.0
+
 (ansible-env) gopal:~ gopalkhanal$ ansible --version
 ansible [core 2.18.6]
-  config file = None
-  configured module search path = ['/Users/gopalkhanal/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
-  ansible python module location = /Users/gopalkhanal/ansible-env/lib/python3.13/site-packages/ansible
-  ansible collection location = /Users/gopalkhanal/.ansible/collections:/usr/share/ansible/collections
-  executable location = /Users/gopalkhanal/ansible-env/bin/ansible
-  python version = 3.13.3 (v3.13.3:6280bb54784, Apr  8 2025, 10:47:54) [Clang 15.0.0 (clang-1500.3.9.4)] (/Users/gopalkhanal/ansible-env/bin/python3.13)
-  jinja version = 3.1.6
-  libyaml = True
-(ansible-env) gopal:~ gopalkhanal$ 
+...
+```
 
+---
 
-Then do aws configure 
+### 6. **Configure AWS CLI**
 
-and run this to verify cli is set properly 
+Set up your CLI credentials:
+
+```bash
+aws configure
+```
+
+Then verify the CLI setup is working:
+
+```bash
 aws sts get-caller-identity
+```
 
+---
 
-create keypair and download called terraform-jenkins.pem from console 
+### 7. **Create a Key Pair in AWS Console**
 
-then run this 
+* Navigate to EC2 → Key Pairs.
+* Create a new key pair named **`terraform-jenkins`**.
+* Download the `.pem` file and place it in a safe location:
+
+  ```
+  ~/.ssh/terraform-jenkins.pem
+  ```
+
+---
+
+### ✅ You're now ready to run Terraform and Ansible with your configured environment.
+
+Let me know if you'd like to include EC2 provisioning, security group creation, or Jenkins setup in your next step.
+
 Perfect! Based on your setup, here is the complete **Terraform infrastructure setup** to launch:
 
 * ✅ 1 Jenkins master (EC2)
