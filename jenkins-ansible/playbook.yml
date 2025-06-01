@@ -1,0 +1,17 @@
+- name: Install Java on all nodes
+  hosts: all
+  become: yes
+  roles:
+    - common
+
+- name: Install and configure Jenkins on master
+  hosts: jenkins_master
+  become: yes
+  roles:
+    - jenkins-master
+
+- name: Authorize master on agent nodes
+  hosts: jenkins_agents
+  become: yes
+  roles:
+    - jenkins-agent

@@ -1,0 +1,9 @@
+# .gitignore
+*.zip
+*.tar.gz
+*.bin
+*.img
+terraform
+.terraform/
+downloads/
+ansible_collections/
